@@ -32,5 +32,10 @@
 			<type>2</type>
 			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/web</locationURI>
 		</link>
+		<link>
+			<name>voiceDemo</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/voiceDemo</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
