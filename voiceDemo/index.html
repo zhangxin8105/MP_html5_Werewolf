@@ -6,9 +6,19 @@
 <!--[if lte IE 7]>
     <script type="text/javascript" src="javascripts/json2.js"></script>
     <![endif]-->
-<script type="text/javascript" src="testvoice.js"></script>
 <script type="text/javascript"
 	src="../web/javascripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="testvoice.js"></script>
+<script language=javascript src='voiceCom.js'></script>
+
+<script language=javascript src='okvoice/okVoice.js'></script>
+<script language=javascript src='okvoice/crypto/crypto-js.js'></script>
+<script language=javascript src='okvoice/crypto/hmac-sha1.js'></script>
+
+<script language=javascript src='iflytek/fingerprint.js'></script>
+<script language=javascript src='iflytek/tts.min.js'></script>
+<script language=javascript src='iflytek/iFlytek.js'></script>
 
 </head>
 <body>
@@ -16,6 +26,7 @@
 	<br />
 	<br />
 	<button class="loginbtn" onclick="testOkVoice()">test OkVoice</button>
+	<button class="loginbtn" onclick="testIFlytek()">test IFlytek</button>
 	<!-- 	<embed id="mp3" src="1.mp3" autostart="true" loop="true" width="0"
 		height="0"></embed> -->
 

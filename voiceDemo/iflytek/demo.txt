@@ -1,0 +1,3 @@
+http://webapi.openspeech.cn/
+
+ssb_param = {"params" : "aue = speex-wb;7, ent=intp65, spd = 50, vol = 50, tte=utf8, caller.appid = 50287829, timestamp = " + (new Date()).toLocaleTimeString() + ", expires = 10000, ssm = 1,vcn = " + vcn, "signature" : "TEST SIGNATURE", "gat" : "mp3"};
