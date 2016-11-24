@@ -1,8 +1,3 @@
-document.write(//
-"<script language=javascript src='okvoice/crypto/crypto-js.js'></script>");
-document.write(//
-"<script language=javascript src='okvoice/crypto/hmac-sha1.js'></script>");
-
 var OkVoice = {
 	apiSecretKey : '1a3c1500ab253b636100c053e1ebea87',
 
@@ -17,14 +12,15 @@ var OkVoice = {
 		var curTime = new Date();
 		var expires = Math.floor(curTime.getTime() / 1000 + 100);
 		var sendData = "" //
-				+ "apiKey=" + OkVoice.options.apiKey //
+				+ "apiKey=" + this.options.apiKey //
 				+ "&expires=" + expires //
-				+ "&format=" + OkVoice.options.format //
-				+ "&speed=" + OkVoice.options.speed//
+				+ "&format=" + this.options.format //
+				+ "&speed=" + this.options.speed//
 				+ "&text=" + text//
-				+ "&voice=" + OkVoice.options.voice;
+				+ "&voice=" + this.options.voice;
 
-		var hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA1, OkVoice.apiSecretKey);
+		var hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA1,
+				this.apiSecretKey);
 		hmac.update(sendData);
 		var hash = hmac.finalize();
 		var hex = CryptoJS.enc.Hex.stringify(hash);
