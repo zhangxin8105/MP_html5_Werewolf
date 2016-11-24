@@ -26,7 +26,34 @@
 	<input id="textinput" value="天黑请闭眼！" placeholder="测试文字">
 	<br />
 	<br />
+
+	<table border="1">
+		<tr>
+			<td>
+				<form>
+				<input type="radio" name="type" value="cn" checked>普通话
+				<br>
+				<input type="radio" name="type" value="cnct">粤语
+				<br>
+				<input type="radio" name="type" value="en">英文
+				</form>
+			</td>
+		</tr>
+	</table>
+	<table border="1">
+		<tr>
+			<td>
+				<form>
+				<input type="radio" name="sex" value="male" checked>男声
+				<br>
+				<input type="radio" name="sex" value="female">女声
+				</form>
+			</td>
+		</tr>
+	</table>
 	<button class="loginbtn" onclick="testOkVoice()">test OkVoice</button>
+
+	<br />
 	<button class="loginbtn" onclick="testIFlytek()">test IFlytek</button>
 	<!-- 	<embed id="mp3" src="1.mp3" autostart="true" loop="true" width="0"
 		height="0"></embed> -->
