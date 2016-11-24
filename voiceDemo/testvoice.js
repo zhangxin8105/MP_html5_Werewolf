@@ -9,5 +9,5 @@ function testOkVoice() {
 }
 
 function testIFlytek() {
-	play($("#textinput").val(), 'aisxping');
+	play($("#textinput").val(), $("input[name='type2']:checked").val());
 }
