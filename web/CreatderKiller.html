@@ -15,7 +15,7 @@
 <body>
 <!--<img src="javascripts/Laungh.jpg" style="background-color: black;position: absolute;left: 0px;right: 0px;top: 0px;bottom: 0px;">-->
 <div class="background" >
-    <div class="loginView">
+    <div class="loginView" id="loginView">
         <label class="top">登录界面</label>
         <br/>
         <br/>
@@ -34,6 +34,19 @@
         <!--<br/>-->
         <button class="loginbtn" onclick="login()">登录游戏</button>
     </div>
+
+
+    <div class="loginView" id="enterRoom" >
+        <label class="top">进入房间</label>
+        <br/>
+        <br/>
+        <input id = "roomNum" type="text" placeholder="请输入房间号">
+        <br/>
+        <br/>
+        <button type="submit" onclick="enterRoom()">进入房间</button>
+    </div>
 </div>
+
+
 </body>
 </html>

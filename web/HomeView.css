@@ -42,3 +42,9 @@ body{
     width: 100%;
 
 }
+
+#enterRoom{
+    height: 100px;
+    background-color: gray;
+    display: none;
+}
