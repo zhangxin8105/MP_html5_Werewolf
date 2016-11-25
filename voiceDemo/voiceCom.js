@@ -1,3 +1,4 @@
+/*  */
 function playVoice(divName, text) {
 
 	$(divName).empty();

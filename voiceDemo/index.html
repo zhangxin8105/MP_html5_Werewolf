@@ -14,7 +14,10 @@
 <script type="text/javascript" src='iflytek/iFlytek.js'></script>
 </head>
 <body>
+	文字:
 	<input id="textinput" value="天黑请闭眼！" placeholder="测试文字">
+	<br /> 语速:
+	<input id="speed" value="50" placeholder="测试语速" type="number" max="100" min="0">
 	<br />
 	<br />
 	<table border="1">
@@ -32,6 +35,8 @@
 			</td>
 		</tr>
 	</table>
+	标准语速:16.666667
+	<br />
 	<button class="loginbtn" onclick="testOkVoice()">test OkVoice</button>
 	<br />
 	<br />
@@ -146,6 +151,8 @@
 			</tr>
 		</table>
 	</form>
+	标准语速:50
+	<br />
 	<button class="loginbtn" onclick="testIFlytek()">test IFlytek</button>
 	<!-- 	<embed id="mp3" src="1.mp3" autostart="true" loop="true" width="0"
 		height="0"></embed> -->
