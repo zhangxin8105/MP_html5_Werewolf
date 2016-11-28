@@ -10,6 +10,8 @@ function enterRoom() {
     var roomNum  = $("#roomNum").val();
     var welcomeString  =  playInfos[($("#loginidtext").val()).toString()].playerName +",欢迎您进入"+roomNum.toString();
     alert(welcomeString)
+    
+    window.location = "room/room.html";
 }
 function login() {
     var userid = $("#loginidtext").val();
