@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>聊天 socket 测试</title>
+<script type="text/javascript" src="../web/javascripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="hichat/socket.io.js"></script>
+<script type="text/javascript" src="hichat/hichat.js"></script>
+<script type="text/javascript" src="yunba/yunba.js"></script>
+<script type="text/javascript" src="testsocketio.js"></script>
+</head>
+<body>
+	昵称:
+	<input id="nickname" value="test user" placeholder="用户名昵称">
+	<br />
+	<button class="loginbtn" onclick="login()">Login</button>
+	<br /> 消息:
+	<input id="message" value="Test Text..." placeholder="测试消息">
+	<br />
+	<button class="sendbtn" onclick="send()">Send</button>
+	<br />
+	<br />
+	<textarea id="dispaly_messages" disabled rows="40" style="width: 100%; height: 100%"></textarea>
+	<br />
+</body>
+</html>
