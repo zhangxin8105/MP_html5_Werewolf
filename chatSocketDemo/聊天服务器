@@ -8,6 +8,7 @@ websocket
 ==================================================
 【Demo】http://kaazing.org/demos/ampq091-messaging-javascript/run/
 【Demo】http://www.websocket.org/demos/chat/run/
+【Demo】http://www.websocket.org/demos/chat/run/
 
 【ws服务器】wss://sandbox.kaazing.net/amqp091
             username:guest
@@ -42,7 +43,10 @@ socket.io
 【socket.io服务器】可能是http://chat.socket.io/
 
 ==================================================
+【Demo】https://yunba.io/quickstart/chatroom/
 
+
+==================================================
 
 
 ------------------------------------------------
