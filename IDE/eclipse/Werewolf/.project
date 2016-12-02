@@ -38,6 +38,11 @@
 			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/chatSocketDemo</locationURI>
 		</link>
 		<link>
+			<name>cryptoDemo</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/cryptoDemo</locationURI>
+		</link>
+		<link>
 			<name>voiceDemo</name>
 			<type>2</type>
 			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/voiceDemo</locationURI>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>加密 解密 测试</title>
+<script type="text/javascript" src="../web/javascripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="testcrypto.js"></script>
+<script type="text/javascript" src="crypto-js.js"></script>
+<script type="text/javascript" src="aes.js"></script>
+</head>
+<body>
+	原文或密文:
+	<input id="orgtext" value="test user" placeholder="加密原文或密文">
+	<br />
+	<button class="test" onclick="encrypt()">加密</button>
+	<button class="test" onclick="decrypt()">解密</button>
+	<br /> 密文:
+	<textarea id="encryptmessages" disabled rows="10" style="width: 100%; height: 100%"></textarea>
+	<br />
+	<br /> 原文:
+	<textarea id="decryptmessages" disabled rows="10" style="width: 100%; height: 100%"></textarea>
+	<br />
+</body>
+</html>
