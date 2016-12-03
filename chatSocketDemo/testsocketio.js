@@ -5,7 +5,7 @@
 var chatWay = null;
 
 window.onload = function() {
-	chatWay = new HiChat();
+	chatWay = new Kaazing();
 	chatWay.callback.onConnect = function() {
 		var oldText = $("#dispaly_messages").val();
 		$("#dispaly_messages").val(oldText //
