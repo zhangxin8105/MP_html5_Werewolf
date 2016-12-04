@@ -334,10 +334,10 @@ var Gateway = (function() {
 		});
 	}
 
-	function doConsumeReady() {
+	function doConsumeReady(d) {
 		log("Consume ready.");
 
-		dispatchEvent(EVENT_SUBSCRIBE);
+		dispatchEvent(EVENT_SUBSCRIBE, d);
 	}
 
 	function doConsumeUnbind() {
@@ -679,6 +679,10 @@ var Gateway = (function() {
 		debug_messages = arguments[0];
 	}
 
+	function clearCallback() {
+		event_listeners = null;
+	}
+
 	return {
 		EVENT_CONNECT : EVENT_CONNECT,
 		EVENT_ERROR : "error",
@@ -691,6 +695,7 @@ var Gateway = (function() {
 		// chat : chat,
 		chatCb : chatCb,
 		connect : connect,
+		clearCallback : clearCallback,
 		verbose : verbose
 	};
 }());

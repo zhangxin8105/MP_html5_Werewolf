@@ -11,6 +11,11 @@ window.onload = function() {
 		$("#dispaly_messages").val(oldText //
 				+ "连接服务器成功！\r\n");
 	};
+	chatWay.callback.onDisconnect = function() {
+		var oldText = $("#dispaly_messages").val();
+		$("#dispaly_messages").val(oldText //
+				+ "断开服务器连接！\r\n");
+	};
 	chatWay.callback.onLoginSuccess = function() {
 		var oldText = $("#dispaly_messages").val();
 		$("#dispaly_messages").val(oldText//

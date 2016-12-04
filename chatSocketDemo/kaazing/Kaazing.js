@@ -23,9 +23,15 @@ var Kaazing = function() {
 Kaazing.prototype = {
 	callback : {},
 	init : function() {
+	},
 
+	loginRun : function() {
 		var that = this;
 
+		if (this.socket != null) {
+			this.socket.close();
+		}
+		Gateway.clearCallback();
 		this.socket = Gateway.chatCb(KAAZING_ID);
 		this.socket.on(Gateway.EVENT_CONNECT, function() {
 			if (that.callback != null && that.callback.onConnect != null) {
@@ -52,14 +58,22 @@ Kaazing.prototype = {
 				that.callback.onSystem(nickName, userCount, type);
 			}
 		});
-		this.socket.on(Gateway.EVENT_MESSAGE, function(user, msg, color) {
+		this.socket.on(Gateway.EVENT_MESSAGE, function(data) {
+			var content = JSON.parse(data);
+
 			if (that.callback != null && that.callback.onNewMsg != null) {
-				that.callback.onNewMsg(user, msg, color);
+				that.callback.onNewMsg(content.user, content.message,
+						content.color);
 			}
 		});
 		this.socket.on('newImg', function(user, img, color) {
 			if (that.callback != null && that.callback.onNewImg != null) {
 				that.callback.onNewImg(user, msg, color);
+			}
+		});
+		this.socket.on(Gateway.EVENT_DISCONNECT, function() {
+			if (that.callback != null && that.callback.onNewImg != null) {
+				that.callback.onDisconnect();
 			}
 		});
 
@@ -79,6 +93,8 @@ Kaazing.prototype = {
 
 	login : function(nickName) {
 		// this.socket.emit('login', nickName);
+		this.chat_user = nickName;
+		this.loginRun();
 	},
 
 	sendMsg : function(msg, color) {
