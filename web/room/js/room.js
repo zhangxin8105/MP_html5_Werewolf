@@ -1,3 +1,3 @@
-﻿function roomSettings(){
+function roomSettings() {
 	window.location = "roomSettings.html";
 }

@@ -1,50 +1,53 @@
-body{
-    position: absolute;
-    left: 0px;
-    right:0px;
-    top: 0px;
-    bottom: 0px;
-}
-.background{
-    background-color: black;
-    position: relative;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    background-image: url(javascripts/langren.jpeg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    text-align: center;
-}
-.loginView{
-    border-style: solid;
-    border-width: thick;
-    border-color: white;
-    /*background-color: darkgray;*/
-    /*position: absolute;*/
-    /*margin: 0 auto;*/
-    /*width: 300px;*/
-    /*height: 200px;*/
-    width: 300px;
-    height: 200px;
-    background-color: darkgray;
-    overflow: auto;
-    margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-
+body {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
 }
 
-.loginView .top{
-    text-align: center;
-    color: red;
-    width: 100%;
-
+.background {
+	background-color: black;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: url(javascripts/langren.jpeg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	text-align: center;
 }
 
-#enterRoom{
-    height: 100px;
-    background-color: gray;
-    display: none;
+.loginView {
+	border-style: solid;
+	border-width: thick;
+	border-color: white;
+	/*background-color: darkgray;*/
+	/*position: absolute;*/
+	/*margin: 0 auto;*/
+	/*width: 300px;*/
+	/*height: 200px;*/
+	width: 300px;
+	height: 200px;
+	background-color: darkgray;
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.loginView .top {
+	text-align: center;
+	color: red;
+	width: 100%;
+}
+
+#enterRoom {
+	height: 100px;
+	background-color: gray;
+	display: none;
 }
