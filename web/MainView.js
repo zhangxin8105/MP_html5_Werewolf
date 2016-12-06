@@ -12,7 +12,10 @@ function enterRoom() {
 			+ ",欢迎您进入" + roomNum.toString();
 	alert(welcomeString)
 
-	window.location = "room/room.html";
+	location.href = "room/room.html?"//
+			+ 'roomNum=' + roomNum //
+			+ "&playerid=" + $("#loginidtext").val() //
+			+ "&playername=" + playInfos[$("#loginidtext").val()].playerName;
 }
 function login() {
 	var userid = $("#loginidtext").val();
