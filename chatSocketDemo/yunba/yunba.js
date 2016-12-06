@@ -1,7 +1,98 @@
 /*
- * http: // hichat.herokuapp.com/
  */
 
+
+/*
+ * 【chat demo】
+ *      appkey   : 54d0c24252be1f7e1dd84c42
+ *      customid : yunba_chatroom_demo_77476
+ *      Topic    = "CHATROOM_DEMO_" + e.getFullYear() + e.getMonth() + e.getDate();
+ *
+ * 【快速入门 demo】
+ *      appkey   : 54d0c24252be1f7e1dd84c42
+ *      customid : yunba_push_demo_1
+ *      Topic    = 随意设置
+ *
+ * 【快速入门】
+ *      appkey   : 52fcc04c4dc903d66d6f8f92
+ *      customid : ?
+ *      Topic    = ?
+ *
+ * 【视频直播互动】
+ *      port     : 3000,
+ *      appkey   : 56a0a88c4407a3cd028ac2fe
+ *      customid : Math.random().toString().substr(2)
+ *                 如:7192223761230707
+ *      Topic    = bullet
+ *      Topic    = like
+ *      Topic    = stat
+ *
+ * 【Yo App】聊天软件
+ *      appkey   : 53db1f030416ca3817e33c57
+ *      customid : ?
+ *      Topic    = ?
+ *
+ * 【云巴多人绘图】
+ *      server   : 'sock.yunba.io',
+ *      port     : 3000,
+ *      appkey   : '56a0a88c4407a3cd028ac2fe'
+ *      customid : Math.random().toString().substr(2);
+ *                 如:21538377087563276
+ *      Topic    = drawing
+ *
+ * 【云巴智能小屋】
+ *      appkey   : '563c4afef085fc471efdf803'
+ *      customid : 随机ID生成
+                   function MathRand() {
+                       var myDate = new Date();
+                       var mytime = myDate.getTime();
+                       var Num = "";
+                       for (var i = 0; i < 6; i++) {
+                           Num += Math.floor(Math.random() * 10);
+                       }
+                       Num = Num + "-" + mytime;
+                       return Num;
+                    };
+ *      Topic    = smart_home_topic
+ *
+ * 【云巴多屏触摸】
+ *      server   : 'sock.yunba.io',
+ *      port     : 3000,
+ *      appkey   : '56a0a88c4407a3cd028ac2fe'
+ *      customid : Math.random().toString().substr(2);
+ *      Topic    = particles
+ *
+ * 【云巴汽车】
+ *      appkey   : '5487f75052be1f7e1dd834e8'
+ *      customid : ?
+ *      Topic    = yunba_car
+ *
+ * 【云巴智能插座】与【云巴智能空调】相同
+ *
+ * 【云巴智能灯】
+ *      appkey   : ?
+ *      customid : ?
+ *      Topic    = ?
+ *
+ * 【云巴智能空调】
+ *      port     : 3000,
+ *      appkey   : '5697113d4407a3cd028abead'
+ *      customid : ?
+ *      Topic    = yunba_smart_plug
+ *      Topic    = smart_office
+ *
+ * 【各个产品页】
+ *      server   : 'sock.yunba.io',
+ *      port     : 443,
+ *      secure   : !0,
+ *      appkey   : '54d0c26252be1f7e1dd84c43'
+ *      customid : "yunba_push_demo_1" + Math.floor(1e5 * Math.random());
+ *      customid : "yunba_push_demo_2" + Math.floor(1e5 * Math.random());
+ *      Topic    = 随意设置
+ *
+ * 【掌阅 iReader】
+ *
+ */
 var script_dependencies = [ //
 "yunba/yunba-js-sdk/socket.io-0.9.16.min.js",//
 "yunba/yunba-js-sdk/yunba-js-sdk.js",//
