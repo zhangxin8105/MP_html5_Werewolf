@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>狼人房间设置</title>
+<link href="rootSettings.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<div>
-		<table border="1" style="width: 100%;">
-			<tr align="center">
-				<td style="width: 30%;">狼人阵营</td>
-				<td style="width: 70%;">
+		<table>
+			<tr>
+				<td class="left">狼人阵营</td>
+				<td class="right">
 					<br />
 					普通狼 <input id="werewolfNumber" value="4" placeholder="人数" type="number" max="100" min="1">
 					<br />
@@ -22,9 +23,9 @@
 					<br />
 				</td>
 			</tr>
-			<tr align="center">
-				<td>村民阵营</td>
-				<td>
+			<tr>
+				<td class="left">村民阵营</td>
+				<td class="right">
 					<br />
 					普通村民 <input id="villagerNumber" value="4" placeholder="人数" type="number" max="100" min="1">
 					<br />
@@ -37,9 +38,9 @@
 					<br />
 				</td>
 			</tr>
-			<tr align="center">
-				<td>神阵营</td>
-				<td>
+			<tr>
+				<td class="left">神阵营</td>
+				<td class="right">
 					<br />
 					预言家 <input id="seer" type="checkbox" checked>
 					<br />
@@ -76,9 +77,9 @@
 					<br />
 				</td>
 			</tr>
-			<tr align="center">
-				<td>其他角色</td>
-				<td>
+			<tr>
+				<td class="left">其他角色</td>
+				<td class="right">
 					<br />
 					盗贼 <input id="thief" type="checkbox">
 					<br />

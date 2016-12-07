@@ -1,0 +1,49 @@
+/*   */
+body {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	background-color: #adace0;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.background {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+table {
+	width: 100%;
+	height: 100%;
+	border: 1px solid #eee;
+	text-align: center;
+}
+
+table td {
+	width: 50%;
+	border: 1px solid #eee;
+}
+
+table td input {
+	background-color: rgba(255, 255, 255, 0.0);
+	background: rgba(255, 255, 255, 0.0);
+}
+
+table td.left {
+	width: 30%;
+}
+
+table td.right {
+	width: 70%;
+}
+
+table tr {
+	text-align: center;
+}
