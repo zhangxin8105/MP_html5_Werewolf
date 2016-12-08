@@ -14,6 +14,7 @@ ImportHelper.add([//
 "js/urlparam.js",//
 "javascripts/socket.io-1.3.5.min.js",//
 "javascripts/jquery-1.10.2.min.js",//
+"js/voice/voicecom.js",//
 ], [//
 function() {
 	init();
@@ -22,7 +23,10 @@ null,//
 null,//
 function() {
 	init();
-} ]);
+}, //
+null,//
+]//
+);
 
 function init() {
 	if (data.initCount++ < 1) {
@@ -44,6 +48,9 @@ function creatRoom() {
 // 根据频道号进行链接
 function enterRoom() {
 	data.roomNum = $("#roomNum").val();
+
+	VoiceCom.setDivName("#div_play");
+	VoiceCom.play(data.playerName + ",欢迎您进入" + data.roomNum);
 	alert(data.playerName + ",欢迎您进入" + data.roomNum);
 
 	CookieHelper.setCookie(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
@@ -65,6 +72,8 @@ function login() {
 	if (data.userid) {
 		// 进行登录操作
 		if (Werewolf.PLAYINFOS[data.userid]) {
+			VoiceCom.setDivName("#div_play");
+			VoiceCom.play(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈");
 			alert(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈（小武笑）");
 			document.getElementById("loginView").style.display = 'none';
 			document.getElementById("enterRoom").style.display = 'inline';
