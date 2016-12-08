@@ -12,6 +12,8 @@ function roomSettings() {
 	console.log(UrlParamHelper.getUrlParamByName(Werewolf.CONST.KEY_USER_ID));
 	console.log(UrlParamHelper.getUrlParamByName(Werewolf.CONST.KEY_USER_NAME));
 
+	console.log(Werewolf.PLAYINFOS);
+
 	// window.location = "settings/roomSettings.html";
 }
 
