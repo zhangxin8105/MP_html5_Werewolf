@@ -14,7 +14,7 @@ function testOkVoice() {
 	var param = makeOkVoiceParam();
 
 	OkVoice.playContent(param.content, param.vcn, param.speed, function(url) {
-		playVoice("#div_video", url);
+		VoiceCom.playVoice("#div_video", url);
 	});
 }
 
@@ -31,6 +31,6 @@ function testIFlytek() {
 	var param = makeIFlytekParam();
 
 	IFlytek.playContent(param.content, param.vcn, param.speed, function(url) {
-		playVoice("#div_video", url);
+		VoiceCom.playVoice("#div_video", url);
 	});
 }
