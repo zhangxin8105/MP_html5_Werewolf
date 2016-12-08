@@ -2,6 +2,12 @@
  * Created by qikai on 16/11/22.
  */
 
+ImportHelper.add([//
+"js/cookies.js",//
+"javascripts/socket.io-1.3.5.min.js",//
+"javascripts/jquery-1.10.2.min.js",//
+]);
+
 function creatRoom() {
 
 }
