@@ -1,3 +1,16 @@
+/* */
+
+var script_dependencies = [ //
+"../js/cookies.js",//
+];
+
+for (var s = 0; s < script_dependencies.length; s++) {
+	script_element = document.createElement("script");
+	script_element.src = script_dependencies[s];
+
+	document.head.appendChild(script_element);
+}
+
 function roomSettings() {
 	// output: Gold%20Coast
 

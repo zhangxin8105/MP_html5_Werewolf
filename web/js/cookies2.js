@@ -88,8 +88,7 @@ var CookieHelper = (function() {
 		getCookieByName : getCookieByName,
 	}
 }());
-document.cookie = "";
 
-console.log("document.cookie:" + document.cookie);
-
-CookieHelper.setCookie("zhangxin", "zhangxind");
+// document.cookie = "";
+// console.log("document.cookie:" + document.cookie);
+// CookieHelper.setCookie("zhangxin", "zhangxind");

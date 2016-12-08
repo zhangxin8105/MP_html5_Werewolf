@@ -139,4 +139,4 @@ function test() {
 	console.log("cookie:" + CookieHelper.getCookie());
 }
 
-test();
+// test();
