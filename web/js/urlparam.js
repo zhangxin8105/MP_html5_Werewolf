@@ -3,6 +3,8 @@
  */
 
 var UrlParamHelper = (function() {
+	var DEBUG = false;
+
 	// urlParam = function(name) {
 	// var maps = new RegExp('[\?&]' + name + '=([^&#]*)')
 	// .exec(window.location.href);
@@ -36,8 +38,10 @@ var UrlParamHelper = (function() {
 		var keyResult = urlhref.match(new RegExp("[\?\&][^\&][^\=]+", "g"));
 		var valueResult = urlhref.match(new RegExp("[\=]([^\&]+)", "g"));
 
-		// console.log(keyResult);
-		// console.log(valueResult);
+		if (DEBUG) {
+			console.log(keyResult);
+			console.log(valueResult);
+		}
 
 		if (keyResult == null || valueResult == null) {
 			return "";
@@ -48,11 +52,15 @@ var UrlParamHelper = (function() {
 			var val = valueResult[i].substring(1);
 			map[key] = decodeURIComponent(val);
 		}
-		// console.log(map);
+		if (DEBUG) {
+			console.log(map);
+		}
 	}
 
 	function makeUrlParam(mainUrl) {
-		// console.log("map:" + JSON.stringify(map));
+		if (DEBUG) {
+			console.log("map:" + JSON.stringify(map));
+		}
 
 		if (map == null || map.length == 0) {
 			return mainUrl;
@@ -115,7 +123,9 @@ var UrlParamHelper = (function() {
 		for ( var k in map) {
 			result[i++] = map[k];
 		}
-		// console.log("result:" + result);
+		if (DEBUG) {
+			console.log("result:" + result);
+		}
 		return result;
 	}
 
@@ -125,7 +135,9 @@ var UrlParamHelper = (function() {
 		for ( var k in map) {
 			result[i++] = k;
 		}
-		// console.log("result:" + result);
+		if (DEBUG) {
+			console.log("result:" + result);
+		}
 		return result;
 	}
 

@@ -1,6 +1,7 @@
 /* import工具类 */
 
 var ImportHelper = (function() {
+	var DEBUG = false;
 	var scriptMap = null;
 
 	function init() {
@@ -8,12 +9,14 @@ var ImportHelper = (function() {
 		if (scriptMap == null || scriptMap.length != scriptOrgList.length) {
 			scriptMap = {};
 
-			console.log("scriptOrgList " + ":" + scriptOrgList);
+			if (DEBUG) {
+				console.log("scriptOrgList " + ":" + scriptOrgList);
+			}
 			for (var i = 0; i < scriptOrgList.length; i++) {
 				scriptMap[scriptOrgList[i].getAttribute("src")] = scriptOrgList[i];
 			}
-			for ( var i in scriptMap) {
-				console.log("scriptMap " + i + ":" + scriptMap[i]);
+			if (DEBUG) {
+				dump();
 			}
 		}
 
@@ -64,7 +67,9 @@ var ImportHelper = (function() {
 
 	function remove(script_dependencies) {
 		init();
-		dump();
+		if (DEBUG) {
+			dump();
+		}
 
 		for (var s = 0; s < script_dependencies.length; s++) {
 			var remove = scriptMap[script_dependencies[s]];
@@ -74,7 +79,9 @@ var ImportHelper = (function() {
 			}
 		}
 
-		dump();
+		if (DEBUG) {
+			dump();
+		}
 	}
 
 	function dump() {

@@ -1,10 +1,12 @@
 /* */
 
-//document.cookie = "";
-//console.log("document.cookie:" + document.cookie);
 var CookieHelper = (function() {
+	var DEBUG = false;
 	var cookie = document.cookie;
-	console.log("init cookie:" + cookie);
+
+	if (DEBUG) {
+		console.log("init cookie:" + cookie);
+	}
 
 	// cookie = '{"zhangxin":"zhangxind","userid":"10001","passwd":"123"}';
 
@@ -16,13 +18,19 @@ var CookieHelper = (function() {
 	if (map == "" || map == null) {
 		map = {};
 	}
-	// console.log("map:" + JSON.stringify(map));
+	if (DEBUG) {
+		console.log("map:" + JSON.stringify(map));
+	}
 
 	function saveCookie() {
-		// console.log("map:" + JSON.stringify(map));
+		if (DEBUG) {
+			console.log("map:" + JSON.stringify(map));
+		}
 		cookie = JSON.stringify(map);
 
-		// console.log("document.cookie:" + cookie);
+		if (DEBUG) {
+			console.log("document.cookie:" + cookie);
+		}
 		document.cookie = cookie;
 		return cookie;
 	}
@@ -75,7 +83,9 @@ var CookieHelper = (function() {
 		for ( var k in map) {
 			result[i++] = map[k];
 		}
-		// console.log("result:" + result);
+		if (DEBUG) {
+			console.log("result:" + result);
+		}
 		return result;
 	}
 
