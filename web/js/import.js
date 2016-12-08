@@ -22,8 +22,10 @@ var ImportHelper = (function() {
 
 	function add(script_dependencies, callback) {
 		var callbackList = {};
-		for (var s = 0; s < script_dependencies.length; s++) {
-			callbackList[script_dependencies[s]] = callback[s];
+		if (callback) {
+			for (var s = 0; s < script_dependencies.length; s++) {
+				callbackList[script_dependencies[s]] = callback[s];
+			}
 		}
 
 		var lastChild = init();
