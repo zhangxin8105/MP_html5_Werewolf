@@ -6,7 +6,22 @@ ImportHelper.add([//
 "js/cookies.js",//
 "javascripts/socket.io-1.3.5.min.js",//
 "javascripts/jquery-1.10.2.min.js",//
-]);
+], [ function() {
+	init();
+}, null, function() {
+	init();
+} ]);
+
+console.log("MainView.js:");
+
+var initCount = 0;
+function init() {
+	if (initCount++ < 1) {
+		return;
+	}
+	$("#loginidtext").val(CookieHelper.getCookieByName("userid"));
+	$("#loginpasswordtext").val(CookieHelper.getCookieByName("password"));
+}
 
 function creatRoom() {
 
@@ -26,6 +41,10 @@ function enterRoom() {
 function login() {
 	var userid = $("#loginidtext").val();
 	var password = $("#loginpasswordtext").val();
+
+	CookieHelper.setCookie("userid", userid);
+	CookieHelper.setCookie("password", password);
+
 	if (userid) {
 		// 进行登录操作
 		if (playInfos[userid.toString()]) {
