@@ -43,13 +43,10 @@ var ImportHelper = (function() {
 		}
 		document.head.removeChild(lastChild);
 
-		if (addList.length == 0 && onloadCb) {
-			onloadCb();
-		}
 		for (var s = 0; s < addList.length; s++) {
 			var script_element = document.createElement("script");
 			script_element.type = "text/javascript";
-			script_element.src = script_dependencies[s];
+			script_element.src = addList[s];
 
 			// var childNodes = new [ document.head.childNodes ];
 			// childNodes.splice(0, 0, script_element);
