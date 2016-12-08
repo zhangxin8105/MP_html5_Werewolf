@@ -9,9 +9,11 @@ var ImportHelper = (function() {
 			}
 
 			script_element = document.createElement("script");
+			script_element.type = "text/javascript";
 			script_element.src = script_dependencies[s];
 
-			document.head.appendChild(script_element);
+			document.head.childNodes.splice(0, 0, script_element);
+			// document.head.appendChild(script_element);
 		}
 	}
 
