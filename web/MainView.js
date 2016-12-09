@@ -9,24 +9,7 @@ var data = {
 	roomNum : "",
 };
 
-ImportHelper.add([//
-"js/cookies.js",//
-"js/urlparam.js",//
-"javascripts/socket.io-1.3.5.min.js",//
-"javascripts/jquery-1.10.2.min.js",//
-"js/voice/voicecom.js",//
-], [//
-function() {
-	init();
-},//
-null,//
-null,//
-function() {
-	init();
-}, //
-null,//
-]//
-);
+init();
 
 function init() {
 	if (data.initCount++ < 1) {

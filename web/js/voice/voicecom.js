@@ -1,11 +1,11 @@
 /*  */
 
-ImportHelper.add([//
-"javascripts/jquery-1.10.2.min.js",//
-"js/voice/iflytek/fingerprint.js",//
-"js/voice/iflytek/tts.min.js",//
-"js/voice/iflytek/iFlytek.js",//
-]);
+//ImportHelper.add([//
+//"javascripts/jquery-1.10.2.min.js",//
+//"js/voice/iflytek/fingerprint.js",//
+//"js/voice/iflytek/tts.min.js",//
+//"js/voice/iflytek/iFlytek.js",//
+//]);
 
 var VoiceCom = (function() {
 
