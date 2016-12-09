@@ -35,6 +35,7 @@ function enterRoom() {
 	VoiceCom.setDivName("#div_play");
 	VoiceCom.play(data.playerName + ",欢迎进入房间" + data.roomNum, function() {
 		alert(data.playerName + ",欢迎进入房间" + data.roomNum);
+		store.set('zhangxin', 'zzzzz');
 
 		CookieHelper.setCookie(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
 
