@@ -52,13 +52,15 @@ function enterRoom() {
 	VoiceCom.setDivName("#div_play");
 	VoiceCom.play(data.playerName + ",欢迎您进入" + data.roomNum, function() {
 		alert(data.playerName + ",欢迎您进入" + data.roomNum);
-	});
-	CookieHelper.setCookie(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
 
-	UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
-	UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_USER_ID, data.userid);
-	UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_USER_NAME, data.playerName);
-	UrlParamHelper.go("room/room.html");
+		CookieHelper.setCookie(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
+
+		UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
+		UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_USER_ID, data.userid);
+		UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_USER_NAME,
+				data.playerName);
+		UrlParamHelper.go("room/room.html");
+	});
 }
 
 function login() {
