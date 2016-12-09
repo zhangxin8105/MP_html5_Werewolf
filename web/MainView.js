@@ -50,9 +50,9 @@ function enterRoom() {
 	data.roomNum = $("#roomNum").val();
 
 	VoiceCom.setDivName("#div_play");
-	VoiceCom.play(data.playerName + ",欢迎您进入" + data.roomNum);
-	alert(data.playerName + ",欢迎您进入" + data.roomNum);
-
+	VoiceCom.play(data.playerName + ",欢迎您进入" + data.roomNum, function() {
+		alert(data.playerName + ",欢迎您进入" + data.roomNum);
+	});
 	CookieHelper.setCookie(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
 
 	UrlParamHelper.setUrlParam(Werewolf.CONST.KEY_ROOM_NUM, data.roomNum);
@@ -73,8 +73,10 @@ function login() {
 		// 进行登录操作
 		if (Werewolf.PLAYINFOS[data.userid]) {
 			VoiceCom.setDivName("#div_play");
-			VoiceCom.play(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈");
-			alert(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈（小武笑）");
+			VoiceCom.play(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈", function() {
+				alert(data.playerName + ",欢迎您进入狼人世界，呜哈哈哈哈（小武笑）");
+			});
+
 			document.getElementById("loginView").style.display = 'none';
 			document.getElementById("enterRoom").style.display = 'inline';
 		} else {
