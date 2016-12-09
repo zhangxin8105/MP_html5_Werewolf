@@ -1,15 +1,8 @@
-/* Werewolf data
- * werewolfjs
+/*
+ * Player data : player.js
  */
 
-var Werewolf = (function() {
-	var CONST = {
-		KEY_USER_ID : "userid",
-		KEY_PASSWORD : "password",
-		KEY_USER_NAME : "playername",
-		KEY_ROOM_NUM : "roomNum",
-	};
-
+var WwPlayer = (function() {
 	var playInfos = {
 		baseIndex : 0,
 		maxIndex : 0,
@@ -18,7 +11,6 @@ var Werewolf = (function() {
 	init();
 
 	return {
-		CONST : CONST,
 		PLAYINFOS : playInfos,
 	};
 
