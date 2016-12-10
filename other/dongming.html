@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>刷票</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+</head>
+<body>
+	刷票号码
+	<input id="number" value="38" placeholder="刷票对象" type="number">
+	<br /> 票数:
+	<input id="count" value="500" placeholder="刷票票数" type="number">
+	<button id="go" onclick="go()">开始刷票</button>
+	<a href="http://micromovie.njzdtq.com/PC_html/MicroMovie/html/tp.html" target="_blank">查看目前投票结果</a>
+	<br />
+	<textarea id="rel" disabled rows="40" style="width: 100%; height: 100%"></textarea>
+	<br />
+</body>
+<script>
+	var app={};
+	app.api = "http://appservertest.njzdtq.com";
+	app.viewcookie = "views";
+	app.votecookie = "new_votes";
+	app.useridcookie = "userid";
+	app.maxvote = 10;
+	var okCount = 0;
+	var errCount = 0;
+	var runCount = 0;
+	var allCount = 0;
+	var _selected=",38";
+
+	function go(){
+		okCount = 0;
+		errCount = 0;
+		runCount = 0;
+		$("#go").disabled = true;
+		_selected=","+$("#number").val();
+		allCount=$("#count").val();
+		for(var i=0;i<allCount;i++){
+			toupiao();
+		}
+	}
+	function toupiao(){
+		$.get(app.api + "/api/userid", function (json) {
+			var _userid = json;
+			console.log("_userid:" + _userid);
+			$.get(app.api + "/api/thumbups", { ids:_selected,userid:_userid}, function (json) {
+				console.log("json:" + json.Message);
+				//$($(".bon_sty")[0]).removeAttr("disabled");
+				if (json.RsCode == 0) {
+					//var values = $.cookie(app.votecookie);
+					//if (values == undefined) { values = ""; }
+					//var dd = new Date(); 
+					//dd.setDate(dd.getDate()+1);//获取明天 
+					//var y = dd.getFullYear(); 
+					//var m = dd.getMonth()+1;//获取当前月份的日期
+					//var d = dd.getDate(); 
+					//var date = new Date(y+'-'+m+'-'+d+' 00:00:00');
+					//date.setTime(date.getTime());//明天的0:00:00
+	//				location.href = "tp.html";
+				} else {
+	//				alert(json.Message);
+				}
+				updateInfo(json.Message=="投票成功");
+			});
+		})
+	}
+	
+	function updateInfo(isok){
+		runCount++;
+		if (isok){
+			okCount++;
+		}else{
+			errCount++;
+		}
+		$("#rel").val(
+			"已经投票 : "+runCount+" 票\n"
+			+"成功    : "+okCount+" 票\n"
+			+"失败    : "+errCount+" 票\n"
+			+"还要投  : "+(allCount-runCount)+" 票\n"
+		);
+		
+		if (allCount==runCount){
+			$("#rel").val(
+			$("#rel").val()
+			+"投票完成!!!!!"
+			);
+			$("#go").disabled = false;
+		}else{
+			//toupiao();
+		}
+	}
+</script>
+
+</html>
