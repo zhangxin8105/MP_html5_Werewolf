@@ -19,7 +19,6 @@
  *      Topic    = ?
  *
  * 【视频直播互动】
- *      port     : 3000,
  *      appkey   : 56a0a88c4407a3cd028ac2fe
  *      customid : Math.random().toString().substr(2)
  *                 如:7192223761230707
@@ -33,8 +32,6 @@
  *      Topic    = ?
  *
  * 【云巴多人绘图】
- *      server   : 'sock.yunba.io',
- *      port     : 3000,
  *      appkey   : '56a0a88c4407a3cd028ac2fe'
  *      customid : Math.random().toString().substr(2);
  *                 如:21538377087563276
@@ -56,8 +53,6 @@
  *      Topic    = smart_home_topic
  *
  * 【云巴多屏触摸】
- *      server   : 'sock.yunba.io',
- *      port     : 3000,
  *      appkey   : '56a0a88c4407a3cd028ac2fe'
  *      customid : Math.random().toString().substr(2);
  *      Topic    = particles
@@ -75,7 +70,6 @@
  *      Topic    = ?
  *
  * 【云巴智能空调】
- *      port     : 3000,
  *      appkey   : '5697113d4407a3cd028abead'
  *      customid : ?
  *      Topic    = yunba_smart_plug
