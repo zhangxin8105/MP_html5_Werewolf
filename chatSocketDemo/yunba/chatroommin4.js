@@ -1,18 +1,3 @@
-window.app = {};
-
-app.appkey = "54d0c24252be1f7e1dd84c42";
-
-app.server = "101.201.140.107";
-app.port = null;
-app.secure = null;
-
-app.customid = "yunba_chatroom_demo_" + Math.floor(1e5 * Math.random());
-var e = new Date;
-app.chatroomTopic = "CHATROOM_DEMO_WW_" + e.getFullYear() + e.getMonth()
-+ e.getDate();
-
-app.username = "游客#" + Math.floor(1e5 * Math.random());
-
 function addOnlineUserElement(e) {
 	var t = $("#chat-online-list"), a = $('<li class="list-group-item"/>')
 			.text(e);
@@ -50,15 +35,29 @@ function sendMessage() {
 	app.sendMessage($("#chatroom-input").val());
 }
 
-var cb = {
+window.app = {};
+
+app.appkey = "54d0c24252be1f7e1dd84c42";
+
+app.server = "101.201.140.107";
+app.port = null;
+app.secure = null;
+
+app.customid = "yunba_chatroom_demo_" + Math.floor(1e5 * Math.random());
+var e = new Date;
+app.chatroomTopic = "CHATROOM_DEMO_WW_" + e.getFullYear() + e.getMonth()
+		+ e.getDate();
+
+app.username = "游客#" + Math.floor(1e5 * Math.random());
+
+app.callback = {
 	OnlineUser : addOnlineUserElement,
 	UnonlineUser : removeOnlineUserElement,
 	OnMessage : addMessageElement,
 };
 
-function init(callback) {
+function initYunbaSocket(app) {
 	app = app || {};
-	app.callback = callback;
 
 	app.yunba_demo = new Yunba({
 		server : app.server,
@@ -218,4 +217,4 @@ function init(callback) {
 	initialize();
 };
 
-init(cb);
+initYunbaSocket(window.app);
