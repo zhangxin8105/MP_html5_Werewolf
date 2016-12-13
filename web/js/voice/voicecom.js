@@ -15,14 +15,24 @@ var VoiceCom = (function() {
 	var callback = {};
 
 	return {
+        setVcn : setVcn,
+        setSpeed : setSpeed,
 		setDivName : setDivName,
 		playVoice : playVoice,
 		play : play,
 	}
 
-	function setDivName(div) {
-		divName = div;
-	}
+    function setVcn(v) {
+        vcn = v;
+    }
+
+    function setSpeed(sp) {
+        speed = sp;
+    }
+
+    function setDivName(div) {
+        divName = div;
+    }
 
 	function play(text, callback) {
 		IFlytek.playContent(//
