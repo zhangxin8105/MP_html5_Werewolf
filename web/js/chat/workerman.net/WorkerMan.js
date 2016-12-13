@@ -57,8 +57,10 @@ WorkerMan.prototype = {
 			// 发言
 			case 'say':
 				if (that.callback != null && that.callback.onNewMsg != null) {
-					that.callback.onNewMsg(data['from_client_name'],
-							data['content'], data['time']);
+				    if (that.chat_user!=data['from_client_name']){
+    					that.callback.onNewMsg(data['from_client_name'],
+    							data['content'], data['time']);
+					}
 				}
 				break;
 
@@ -135,7 +137,7 @@ WorkerMan.prototype = {
 
     login : function(nickName) {
         // this.socket.emit('login', nickName);
-        this.chat_user = nickName;
+        this.chat_user = nickName + Math.floor(1e12 * Math.random());
         // 登录
         this.sendlogin();
     },

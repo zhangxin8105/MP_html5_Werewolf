@@ -88,7 +88,7 @@ YunbaInf.prototype = {
 		this.yunba_demo.init(function(success) {
 			if (success) {
 				that.yunba_demo.connect_by_customid(//
-				that.data.customid + Math.floor(1e5 * Math.random()),//
+				that.data.customid + Math.floor(1e12 * Math.random()),//
 				function(success, msg) {
 					if (success) {
 						console.log('连接成功!');
@@ -128,8 +128,10 @@ YunbaInf.prototype = {
 						console.log('msg:' + msg);
 						if (that.callback != null
 								&& that.callback.onNewMsg != null) {
-							that.callback.onNewMsg(msg.username,
-									msg.dataContent, null);
+							if(msg.username!=that.nickName){
+    							that.callback.onNewMsg(msg.username,
+    									msg.dataContent, null);
+							}
 						}
 					});
 		}
@@ -173,7 +175,7 @@ YunbaInf.prototype = {
 	},
 
 	login : function(nickName) {
-		this.nickName = nickName;
+		this.nickName = nickName + Math.floor(1e12 * Math.random());
 		this.socket.emit('login', nickName);
 	},
 
