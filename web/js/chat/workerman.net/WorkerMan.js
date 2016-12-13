@@ -3,6 +3,7 @@
  */
 
 var KAAZING_ID = "8381c16e-11f4-4bac-9ae7-c03a2c9376ec";
+var ROOM_NUMBER = 5;
 
 var EVENT_CONNECT = "connect";
 var EVENT_DISCONNECT = "disconnect";
@@ -145,7 +146,7 @@ WorkerMan.prototype = {
     sendlogin : function() {
         // 登录
         var login_data = '{"type":"login","client_name":"'
-                + this.chat_user.replace(/"/g, '\\"') + '","room_id":"4"}';
+                + this.chat_user.replace(/"/g, '\\"') + '","room_id":'+ ROOM_NUMBER + '}';
         console.log("websocket握手成功，发送登录数据:" + login_data);
         if(this.socket)this.socket.send(login_data);
     },
