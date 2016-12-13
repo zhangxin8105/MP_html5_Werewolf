@@ -21,7 +21,7 @@ window.onload = function() {
 	console.log("window.onload");
 
 	var cb = {};
-	ChatWay.init(new HiChat(), cb);
+	ChatWay.init(new WorkerMan(), cb);
 	cb.onConnect = function() {
 		showMsg("连接服务器成功！\r\n");
 	};
