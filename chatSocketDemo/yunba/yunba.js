@@ -1,7 +1,6 @@
 /*
  */
 
-
 /*
  * 【chat demo】
  *      appkey   : 54d0c24252be1f7e1dd84c42
@@ -40,16 +39,16 @@
  * 【云巴智能小屋】
  *      appkey   : '563c4afef085fc471efdf803'
  *      customid : 随机ID生成
-                   function MathRand() {
-                       var myDate = new Date();
-                       var mytime = myDate.getTime();
-                       var Num = "";
-                       for (var i = 0; i < 6; i++) {
-                           Num += Math.floor(Math.random() * 10);
-                       }
-                       Num = Num + "-" + mytime;
-                       return Num;
-                    };
+ function MathRand() {
+ var myDate = new Date();
+ var mytime = myDate.getTime();
+ var Num = "";
+ for (var i = 0; i < 6; i++) {
+ Num += Math.floor(Math.random() * 10);
+ }
+ Num = Num + "-" + mytime;
+ return Num;
+ };
  *      Topic    = smart_home_topic
  *
  * 【云巴多屏触摸】
@@ -99,16 +98,20 @@ for (var s = 0; s < script_dependencies.length; s++) {
 	document.head.appendChild(script_element);
 }
 
+// !function() {
 var YunbaInf = function() {
-	this.socket = null;
-};
+	this.callback = {};
 
-YunbaInf.prototype = {
-	callback : {},
-	init : function() {
+	this.callback.zhangxin = Math.random() * 1000;
+	console.log("zhangxin" + this.callback.zhangxin);
+
+	this.init = function() {
 		var that = this;
 		this.yunba_demo = new Yunba({
-			appkey : '54d0c24252be1f7e1dd84c42'
+			appkey : '54d0c24252be1f7e1dd84c42',
+			server : "101.201.140.107",
+//			port : 443,
+//			secure : !0,
 		});
 		this.yunba_demo.init(function(success) {
 			if (success) {
@@ -122,9 +125,17 @@ YunbaInf.prototype = {
 							}
 						});
 			}
-		});
+		}, function() {
+			console.log("服务断线，正在尝试重新连接...");
+			console.log("OFFLINE");
+        });
 
 		function sub() {
+			var t = JSON.stringify({
+				dataType : "ONLINE_STATE",
+				dataContent : "ONLINE",
+				username : that.nickName,
+			});
 			var e = new Date;
 			that.chatroomTopic = "CHATROOM_DEMO_" + e.getFullYear()
 					+ e.getMonth() + e.getDate();
@@ -137,6 +148,15 @@ YunbaInf.prototype = {
 				} else {
 					console.log(msg);
 				}
+				that.yunba_demo.publish({
+					'topic' : that.chatroomTopic,
+					'msg' : t,
+				}, function(success, msg) {
+					if (success)
+						console.log('登录成功');
+					else
+						console.log("Error:" + msg);
+				});
 			});
 			// <!-- 用 set_message_cb() 设置收到消息时调用的回调函数 -->
 			that.yunba_demo
@@ -157,62 +177,69 @@ YunbaInf.prototype = {
 					});
 		}
 
-		var that = this;
-		this.socket = io.connect("sock.yunba.io:443", {
-			force_new_connection : true,
-			secure : true
-		});
-		this.socket.on('connect', function() {
-			if (that.callback != null && that.callback.onConnect != null) {
-				that.callback.onConnect();
-			}
-		});
-		this.socket.on('nickExisted', function() {
-			if (that.callback != null && that.callback.onNickExisted != null) {
-				that.callback.onNickExisted();
-			}
-		});
-		this.socket.on('loginSuccess', function() {
-			if (that.callback != null && that.callback.onLoginSuccess != null) {
-				that.callback.onLoginSuccess();
-			}
-		});
-		this.socket.on('error', function(err) {
-			if (that.callback != null && that.callback.onError != null) {
-				that.callback.onError(err);
-			}
-		});
-		this.socket.on('system', function(nickName, userCount, type) {
-			if (that.callback != null && that.callback.onSystem != null) {
-				that.callback.onSystem(nickName, userCount, type);
-			}
-		});
-		this.socket.on('newImg', function(user, img, color) {
-			if (that.callback != null && that.callback.onNewImg != null) {
-				that.callback.onNewImg(user, msg, color);
-			}
-		});
+		// var that = this;
+		// this.socket = io.connect("sock.yunba.io:443", {
+		// force_new_connection : true,
+		// secure : true
+		// });
+		// this.socket.on('connect', function() {
+		// if (that.callback != null && that.callback.onConnect != null) {
+		// that.callback.onConnect();
+		// }
+		// });
+		// this.socket.on('nickExisted', function() {
+		// if (that.callback != null && that.callback.onNickExisted != null) {
+		// that.callback.onNickExisted();
+		// }
+		// });
+		// this.socket.on('loginSuccess', function() {
+		// if (that.callback != null && that.callback.onLoginSuccess != null) {
+		// that.callback.onLoginSuccess();
+		// }
+		// });
+		// this.socket.on('error', function(err) {
+		// if (that.callback != null && that.callback.onError != null) {
+		// that.callback.onError(err);
+		// }
+		// });
+		// this.socket.on('system', function(nickName, userCount, type) {
+		// if (that.callback != null && that.callback.onSystem != null) {
+		// that.callback.onSystem(nickName, userCount, type);
+		// }
+		// });
+		// this.socket.on('newImg', function(user, img, color) {
+		// if (that.callback != null && that.callback.onNewImg != null) {
+		// that.callback.onNewImg(user, msg, color);
+		// }
+		// });
 		// this.socket.connect();
-	},
+	};
 
-	login : function(nickName) {
-		this.socket.emit('login', nickName);
-	},
+	this.login = function(nickName) {
+		this.nickName = nickName;
+		// this.socket.emit('login', nickName);
+	};
+	this.login("游客#818" + Math.floor(Math.random() * 100));
 
-	sendMsg : function(msg, color) {
+	this.sendMsg = function(msg, color) {
 		this.yunba_demo.publish({
 			'topic' : this.chatroomTopic,
-			'msg' : msg
+			'msg' : JSON.stringify({
+				dataType : "MESSAGE",
+				username : this.nickName,
+				dataContent : msg,
+			}),
 		}, function(success, msg) {
 			if (success)
 				console.log('消息发布成功');
 			else
 				console.log(msg);
 		});
-	},
+	};
 
-	sendImg : function(result, color) {
+	this.sendImg = function(result, color) {
 		// that.socket.emit('img', e.target.result, color);
 		this.socket.emit('img', result, color);
-	},
-};
+	};
+}
+// }();

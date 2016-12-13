@@ -1,76 +1,98 @@
 window.app = {};
 
-var cb = {};
+app.appkey = "54d0c24252be1f7e1dd84c42";
 
-!function(callback) {
-	"use strict";
+app.server = "101.201.140.107";
+app.port = null;
+app.secure = null;
+
+app.customid = "yunba_chatroom_demo_" + Math.floor(1e5 * Math.random());
+var e = new Date;
+app.chatroomTopic = "CHATROOM_DEMO_WW_" + e.getFullYear() + e.getMonth()
++ e.getDate();
+
+app.username = "游客#" + Math.floor(1e5 * Math.random());
+
+function addOnlineUserElement(e) {
+	var t = $("#chat-online-list"), a = $('<li class="list-group-item"/>')
+			.text(e);
+	a.attr("id", e), t.append(a)
+}
+
+function removeOnlineUserElement(e) {
+	$('li[id="' + e + '"]').remove()
+}
+
+function addMessageElement(e, t) {
+	console.log(e);
+	var a = $("#chat-messages");
+	if (t) {
+		a.append($("<li>").addClass("chat-log").text(e.log));
+		return;
+	}
+
+	var o = $('<span class="chat-username"/>').text(e.username);
+	var n = $('<span class="chat-message-body">').text("  " + e.dataContent);
+	var i = $('<li class="chat-message"/>').data("username", e.username)
+			.append(o, n);
+	a.append(i);
+}
+
+function sendMessageOnEnter(e) {
+	var isKey = (13 == e.keyCode);
+	e.preventDefault();
+	var isView = ("chatroom-input" == $(e.target).attr("id"));
+	var issendOK = sendMessage();
+	return isKey && isView && issendOK;
+}
+
+function sendMessage() {
+	app.sendMessage($("#chatroom-input").val());
+}
+
+var cb = {
+	OnlineUser : addOnlineUserElement,
+	UnonlineUser : removeOnlineUserElement,
+	OnMessage : addMessageElement,
+};
+
+function init(callback) {
 	app = app || {};
 	app.callback = callback;
-	var e = new Date;
-	app.chatroomTopic = "CHATROOM_DEMO_" + e.getFullYear() + e.getMonth()
-			+ e.getDate();
-	app.yunba_demo = new Yunba({
-		// server: "sock.yunba.io",
-		server : "101.201.140.107",
-		// port: 443,
-		// secure: !0,
-		appkey : "54d0c24252be1f7e1dd84c42",
-	});
-	var username = "游客#" + Math.floor(1e5 * Math.random());
 
-	app.ChatroomView = Backbone.View.extend({
-		el : "#view-chatroom",
-		events : {
-			"click #btn-send-msg" : "sendMessage",
-		},
-		sendMessage : function() {
-			app.sendMessage();
-		},
+	app.yunba_demo = new Yunba({
+		server : app.server,
+		port : app.port,
+		secure : app.secure,
+		appkey : app.appkey,
 	});
 
 	function userController(e) {
 		var o = e.username;
 		if ("ONLINE" === e.dataContent) {
-			addOnlineUserElement(o);
+			if (app.callback && app.callback.OnlineUser) {
+				app.callback.OnlineUser(o);
+			}
 		} else if ("OFFLINE" === e.dataContent) {
-			removeOnlineUserElement(o);
+			if (app.callback && app.callback.UnonlineUser) {
+				app.callback.UnonlineUser(o);
+			}
 		}
-	}
-
-	function addOnlineUserElement(e) {
-		var t = $("#chat-online-list"), a = $('<li class="list-group-item"/>')
-				.text(e);
-		a.attr("id", e), t.append(a)
-	}
-
-	function removeOnlineUserElement(e) {
-		$('li[id="' + e + '"]').remove()
 	}
 
 	function preventSubmit(e) {
 		e.preventDefault()
 	}
-	function sendMessageOnEnter(e) {
-		var isKey = (13 == e.keyCode);
-		e.preventDefault();
-		var isView = ("chatroom-input" == $(e.target).attr("id"));
-		var issendOK = sendMessage();
-		return isKey && isView && issendOK;
-	}
-
-	function sendMessage() {
-		if ("" !== $("#chatroom-input").val()) {
+	app.sendMessage = function sendMessage(msg) {
+		if ("" !== msg) {
 			var e = JSON.stringify({
 				dataType : "MESSAGE",
-				dataContent : $("#chatroom-input").val(),
-				username : username
+				dataContent : msg,
+				username : app.username
 			});
 			publish(app.chatroomTopic, e), $("#chatroom-input").val("");
 		}
 	}
-	app.sendMessage = sendMessage;
-	console.log($("#btn-send-msg").onclick);
-	$("#btn-send-msg").onclick = app.sendMessage;
 
 	function publish(e, t) {
 		var a = this;
@@ -86,7 +108,10 @@ var cb = {};
 		e = JSON.parse(e);
 		switch (e.dataType) {
 		case "MESSAGE":
-			addMessageElement(e);
+			if (app.callback && app.callback.OnMessage) {
+				app.callback.OnMessage(e);
+			}
+
 			break;
 		case "ONLINE_STATE":
 			userController(e);
@@ -114,26 +139,9 @@ var cb = {};
 		})
 	}
 
-	function addMessageElement(e, t) {
-		console.log(e);
-		var a = $("#chat-messages");
-		if (t) {
-			a.append($("<li>").addClass("chat-log").text(e.log));
-			return;
-		}
-
-		var o = $('<span class="chat-username"/>').text(e.username);
-		var n = $('<span class="chat-message-body">')
-				.text("  " + e.dataContent);
-		var i = $('<li class="chat-message"/>').data("username", e.username)
-				.append(o, n);
-		a.append(i);
-	}
-
 	function connect() {
 		logMessage("正在尝试连接...");
-		var customid = "yunba_chatroom_demo_" + Math.floor(1e5 * Math.random());
-		app.yunba_demo.connect_by_customid(customid, function(t, a) {
+		app.yunba_demo.connect_by_customid(app.customid, function(t, a) {
 			if (t) {
 				logMessage("连接成功...");
 				setMessageCallback();
@@ -167,9 +175,9 @@ var cb = {};
 		var t = JSON.stringify({
 			dataType : "ONLINE_STATE",
 			dataContent : e,
-			username : username
+			username : app.username
 		});
-		publish(app.chatroomTopic, t)
+		publish(app.chatroomTopic, t);
 	}
 
 	function logMessage(e) {
@@ -181,7 +189,8 @@ var cb = {};
 	function initCloseWindowEvent() {
 		var e = this;
 		$(window).on("unload", function() {
-			e.sendState("OFFLINE"), e.unsubscribe(app.chatroomTopic)
+			e.sendState("OFFLINE");
+			e.unsubscribe(app.chatroomTopic);
 		})
 	}
 
@@ -207,8 +216,6 @@ var cb = {};
 	}
 
 	initialize();
+};
 
-	$(document).ready(function() {
-		app.chatroomView = new app.ChatroomView
-	})
-}(cb);
+init(cb);
