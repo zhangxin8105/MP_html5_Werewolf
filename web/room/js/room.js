@@ -11,10 +11,14 @@ function roomSettings() {
 }
 
 function testroom() {
-	ChatWay.send("zhangxin" + new Date().getTime());
-	store.forEach(function(key, val) {
-		console.log(key, '==', val);
-	})
+    ChatWay.send("zhangxin" + new Date().getTime());
+    store.forEach(function(key, val) {
+        console.log(key, '==', val);
+    })
+}
+
+function send() {
+    ChatWay.send($("#message").val() +" "+ new Date().toUTCString());
 }
 
 var CHAT_SELECT_LIST={
@@ -31,6 +35,7 @@ var CHAT_SELECT_LIST={
 };
 
 var CHAT_SELECT_ELEMENT_NAME='chatSelect';
+var VOICE_SELECT_ELEMENT_NAME='voiceSelect';
 
 function initChatSelect(){
     var chatSel = document.getElementById(CHAT_SELECT_ELEMENT_NAME);
@@ -85,6 +90,73 @@ function changeChatSelect(){
     initChat();
 }
 
+var VOICE_SELECT_LIST={
+    "鸭先生" : "aisduck",
+    "蜡笔小新" : "vixx",
+
+    "小筠(女播音)" : "aisjying",
+    
+    "小峰(男)" : "vixf",
+    "许久(男)" : "aisjiuxu",
+    "许多(男)" : "aisduoxu",
+    "小宇(男)" : "xiaoyu",
+    
+    "小燕(女)" : "xiaoyan",
+    "小琪(女)" : "xiaoqi",
+    "小琪(女)" : "vixq",
+    "小萍(女)" : "aisxping",
+    "小婧(女)" : "aisjinger",
+    "叶芳(女故事)" : "yefang",
+    "小梦(女)" : "aisxmeng",
+    "小春(女故事)" : "aismengchun",
+    "子琪(女)" : "ziqi",
+
+    "楠楠(童故事)" : "vinn",
+    "许小宝(童)" : "aisbabyxu",
+    "老孙(男中年)" : "vils",
+
+    "小梅(粤语女)" : "vixm",
+
+    "晓琳(台普女)" : "aisxlin",
+    "小莉(台普女)" : "vixl",
+
+    "小芸(东北女)" : "vixyun",
+
+    "小蓉(四川女)" : "aisxrong",
+    "小蓉(四川女)" : "vixr",
+
+    "小坤(河南男)" : "vixk",
+
+    "小强(湖南男)" : "aisxqiang",
+    "小强(湖南男)" : "vixqa",
+
+    "小英(陕西女)" : "aisxying",
+    "小英(陕西女)" : "vixying",
+};
+
+function initVoiceSelect(){
+    var chatSel = document.getElementById(VOICE_SELECT_ELEMENT_NAME);
+    for (var k in VOICE_SELECT_LIST){
+        var oOption = document.createElement("OPTION");
+        chatSel.options.add(oOption);
+        oOption.innerText = k;
+        oOption.value  = VOICE_SELECT_LIST[k];
+    }
+}
+
+function changeVoiceSpeed(){
+    $("#showVoiceSpeed") .val($("#voiceSpeed") .val());
+}
+
+function playVoice(){
+    VoiceCom.setVcn($("#"+VOICE_SELECT_ELEMENT_NAME) .val());
+    VoiceCom.setSpeed ( $("#voiceSpeed") .val());
+
+    VoiceCom.setDivName("#div_play");
+    VoiceCom.play($("#message").val(), function() {
+        });
+}
+
 window.onload = function() {
 	console.log("window.onload");
 
@@ -103,6 +175,8 @@ window.onload = function() {
     initChatSelect();
 
     initChat();
+
+    initVoiceSelect();
 };
 
 function showMsg(msg) {

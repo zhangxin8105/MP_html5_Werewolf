@@ -29,20 +29,38 @@
 <!-- chat workerman.net -->
 <script type="text/javascript" src="../js/chat/workerman.net/web_socket.js"></script>
 <script type="text/javascript" src="../js/chat/workerman.net/WorkerMan.js"></script>
+<!--       -->
+<!-- voice -->
+<script type="text/javascript" src="../js/voice/iflytek/fingerprint.js"></script>
+<script type="text/javascript" src="../js/voice/iflytek/tts.min.js"></script>
+<script type="text/javascript" src="../js/voice/iflytek/iFlytek.js"></script>
+<script type="text/javascript" src="../js/voice/voicecom.js"></script>
 <!--      -->
 <!-- self -->
 <script type="text/javascript" src="js/room.js"></script>
 </head>
 <body>
 	<div class="background">
-		<button class="test" onclick="testroom()">房间测试</button>
-		<button class="settings" onclick="roomSettings()">房间设置</button>
-		<select id="chatSelect" onChange="changeChatSelect()">
+        <select id="chatSelect" onChange="changeChatSelect()">
         </select>
+        <input id="message" value="天黑请闭眼！" placeholder="测试消息">
+        <button class="sendbtn" onclick="send()">Send</button>
+        <br />
+        <br />
+        <select id="voiceSelect">
+        </select>
+        <input id="voiceSpeed" defaultValue="50" type="range" min=0 max =100 oninput="changeVoiceSpeed()">
+        <input id="showVoiceSpeed" value="50" type="number" min=0 max =100 disabled> 
+        <button class="sendbtn" onclick="playVoice()">语音测试</button>
+        <br />
+        <br />
+        <button class="test" onclick="testroom()">房间测试</button>
+		<button class="settings" onclick="roomSettings()">房间设置</button>
 		<!-- <form action="a.asp" method="post" onsubmit="return send();"></form> -->
-		<textarea id="dispaly_messages" disabled rows="40" style="width: 100%; height: 100%"></textarea>
+		<textarea id="dispaly_messages" rows="40" style="width: 100%; height: 100%"></textarea>
 		<table class="userlist" id="userlist">
 		</table>
+        <div id="div_play"></div>
 	</div>
 </body>
 </html>
