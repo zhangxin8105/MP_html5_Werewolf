@@ -6,7 +6,7 @@ WerewolfCrypto = (function() {
 	var keyStr = '_Werewolf_Crypto';
 	var key = CryptoJS.enc.Utf8.parse(keyStr);
 
-	var useBase64 = false;
+	var useBase64 = true;
 
 	return {
 		encrypt : encrypt,
