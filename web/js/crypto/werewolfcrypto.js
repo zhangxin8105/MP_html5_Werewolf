@@ -46,18 +46,20 @@ WerewolfCrypto = (function() {
 		var decryptedData2 = null;
 		var decryptedStr = "";
 
-		try {
-			var encryptedHexStr = CryptoJS.enc.Hex.parse(msg);
-			encryptedBase64Str2 = CryptoJS.enc.Base64
-					.stringify(encryptedHexStr);
-			decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str2, key,
-					makeMode());
-			decryptedStr2 = decryptedData.toString(CryptoJS.enc.Utf8);
+		if (!useBase64) {
+			try {
+				var encryptedHexStr = CryptoJS.enc.Hex.parse(msg);
+				encryptedBase64Str2 = CryptoJS.enc.Base64
+						.stringify(encryptedHexStr);
+				decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str2, key,
+						makeMode());
+				decryptedStr2 = decryptedData.toString(CryptoJS.enc.Utf8);
 
-			return decryptedStr2;
-		} catch (e) {
-			for ( var p in e) {
-				document.writeln(p + "=" + e[p]);
+				return decryptedStr2;
+			} catch (e) {
+				for ( var p in e) {
+					document.writeln(p + "=" + e[p]);
+				}
 			}
 		}
 		try {
@@ -74,5 +76,4 @@ WerewolfCrypto = (function() {
 			}
 		}
 	}
-
 }());
