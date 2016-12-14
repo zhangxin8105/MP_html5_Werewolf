@@ -44,7 +44,7 @@ var ChatWay = (function() {
 		};
 		chatWay.callback.onNewMsg = function(user, msg, color) {
 			if (callback != null && callback.onNewMsg) {
-				callback.onNewMsg(user, msg, color);
+				callback.onNewMsg(user, WerewolfCrypto.decrypt(msg), color);
 			}
 		};
 		chatWay.callback.onNewImg = function(user, img, color) {
@@ -62,7 +62,9 @@ var ChatWay = (function() {
 	}
 
 	function send(msg) {
-		chatWay.sendMsg(msg);
+		var msgCrypto = WerewolfCrypto.encrypt(msg);
+
+		chatWay.sendMsg(msgCrypto);
 	}
 
 }());
