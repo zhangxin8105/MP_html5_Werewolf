@@ -11,10 +11,14 @@ function roomSettings() {
 }
 
 function testroom() {
-	ChatWay.send("zhangxin" + new Date().getTime());
+	// ChatWay.send("zhangxin" + new Date().getTime());
 	store.forEach(function(key, val) {
 		console.log(key, '==', val);
 	})
+
+	var msg = WerewolfCrypto.encrypt("test text 1111111");
+	console.log(msg);
+	console.log(WerewolfCrypto.decrypt(msg));
 }
 
 function send() {
