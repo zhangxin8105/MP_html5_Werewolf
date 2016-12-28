@@ -4,20 +4,29 @@
 <meta charset="UTF-8">
 <title>刷票</title>
 <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<!-- <script type="text/javascript"
+	src="http://www.ajax-cross-domain.com/cgi-bin/ACD/ACD.js?uri=(http://www.baidu.com)"></script>
+<script type="text/javascript">
+	alert(ACD.responseText);
+</script> -->
 </head>
 <body>
 	刷票号码
 	<input id="number" value="38" placeholder="刷票对象" type="number">
-	<br /> 票数:
+	<br />
+	票数:
 	<input id="count" value="500" placeholder="刷票票数" type="number">
 	<button id="go" onclick="go()">开始刷票</button>
 	<a href="http://micromovie.njzdtq.com/PC_html/MicroMovie/html/tp.html" target="_blank">查看目前投票结果</a>
 	<br />
 	<textarea id="rel" disabled rows="40" style="width: 100%; height: 100%"></textarea>
 	<br />
+	<iframe id="ifuserid" src="http://appservertest.njzdtq.com/api/userid"></iframe>
+	<div id="new-tempSypialnia"></div>
+	<iframe width="0%" height="0" style="display: none" src="http://appservertest.njzdtq.com/api/userid" frameborder="0"></iframe>
 </body>
 <script>
-	var app={};
+	var app = {};
 	app.api = "http://appservertest.njzdtq.com";
 	app.viewcookie = "views";
 	app.votecookie = "new_votes";
@@ -27,24 +36,149 @@
 	var errCount = 0;
 	var runCount = 0;
 	var allCount = 0;
-	var _selected=",38";
+	var _selected = ",38";
 
-	function go(){
+	function createXMLHttpRequest() {
+		var xmlHttp;
+		if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			if (xmlHttp.overrideMimeType)
+				xmlHttp.overrideMimeType('text/html');
+		} else if (window.ActiveXObject) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+				}
+			}
+		}
+		return xmlHttp;
+	}
+
+	function getBadJson(a) {
+		$.ajax({
+			url : a,
+			dataType : "JSONP",
+			complete : function(a) {
+				for (var c, d, b = a.responseText; b.length && d;) {
+					console.log("loop"), d = !1;
+					try {
+						c = parseJSON(b)
+					} catch (a) {
+						d = !0
+					}
+					if (!d)
+						break
+				}
+				b = b.replace("<!DOCTYPE html>", ""), b = b.replace("<html>",
+						""), b = b.replace("<head>", ""), b = b.replace(
+						"</body>", ""), b = b.replace("</html>", ""), b = b
+						.replace("jsonCallback(", ""), b = b.replace(");", "");
+				var e = jQuery.parseJSON(b);
+				console.log(e)
+			}
+		})
+	}
+
+	function go() {
+
+		$("#new-tempSypialnia").load(
+				"http://appservertest.njzdtq.com/api/userid",
+				function(data) {
+					var val = $(data).find("#temp_Sypialnia");
+					console.log("`elem.data('value')`:", val.data("value"),
+							"`elem.val()`:", val.val(), "`elem[0].value`:",
+							val[0].value);
+					var result = val.data("value");
+					alert(result);
+				});
+
 		okCount = 0;
 		errCount = 0;
 		runCount = 0;
 		$("#go").disabled = true;
-		_selected=","+$("#number").val();
-		allCount=$("#count").val();
-		for(var i=0;i<allCount;i++){
-			toupiao();
+		_selected = "," + $("#number").val();
+		allCount = $("#count").val();
+
+		var yqlUrl1 = "http://query.yahooapis.com/v1/public/yql?q=select%20symbol%2C%20price%20from%20csv%20"
+				+ "where%20url%3D'http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes.csv%3F"
+				+ "s%3DIBM%2CYHOO%2CGOOG%2CMSFT%26f%3Dsl1d1t1c1ohgv%26e%3D.csv'%20and%20"
+				+ "columns%3D'symbol%2Cprice%2Cdate%2Ctime%2Cchange%2Ccol1%2Chigh%2Clow%2Ccol2'"
+				+ "&format=json&callback=?";
+		$.getJSON(yqlUrl1, function(data) {
+			$.each(data.query.results.row, function(index, item) {
+				$('#quotes').append(
+						$('<p/>').append(
+								$('<span class="left"/>').text(item.symbol))
+								.append(
+										$('<span class="right"/>').text(
+												'$' + item.price)));
+			});
+		});
+
+		//		$.get('http://appleapp.mt4rental.com/ios/meta/mt4.html',
+		//			function(json) {
+		//			alert(json);
+		//	});
+
+		//document.frames('ifuserid').location.reload();
+		var d = window.frames["ifuserid"];
+
+		var win = document.getElementById('ifuserid');
+		//alert(win.document.body.innerText);
+
+		//getBadJson("http://appservertest.njzdtq.com/api/userid");
+
+		$.ajax({
+			url : "http://appservertest.njzdtq.com/api/userid",
+			dataType : "jsonp",
+			success : function(data) {
+				console.log(data)
+				alert(data);
+			},
+			complete : function(data) {
+				console.log(data)
+				alert(data);
+			}
+		});
+
+		var req = new XMLHttpRequest();
+
+		// Feature detection for CORS
+		if ('withCredentials' in req) {
+			req.open('GET', 'http://appservertest.njzdtq.com/api/userid', true);
+			// Just like regular ol' XHR
+			req.onreadystatechange = function() {
+				if (req.readyState === 4) {
+					if (req.status >= 200 && req.status < 400) {
+						// JSON.parse(req.responseText) etc.
+					} else {
+						// Handle error case
+					}
+				}
+			};
+			req.send();
+		}
+
+		var u = $("#ifuserid");
+		//u[0].src = "http://www.baidu.com";
+		//console.log($("#ifuserid").contentWindow.document.body.innerText);
+
+		for (var i = 0; i < allCount; i++) {
+			//toupiao();
 		}
 	}
-	function toupiao(){
-		$.get(app.api + "/api/userid", function (json) {
+	function toupiao() {
+		$.get(app.api + "/api/userid", function(json) {
 			var _userid = json;
 			console.log("_userid:" + _userid);
-			$.get(app.api + "/api/thumbups", { ids:_selected,userid:_userid}, function (json) {
+
+			$.post(app.api + "/api/thumbups", {
+				ids : _selected,
+				userid : _userid
+			}, function(json) {
 				console.log("json:" + json.Message);
 				//$($(".bon_sty")[0]).removeAttr("disabled");
 				if (json.RsCode == 0) {
@@ -57,39 +191,33 @@
 					//var d = dd.getDate(); 
 					//var date = new Date(y+'-'+m+'-'+d+' 00:00:00');
 					//date.setTime(date.getTime());//明天的0:00:00
-	//				location.href = "tp.html";
+					//				location.href = "tp.html";
 				} else {
-	//				alert(json.Message);
+					//				alert(json.Message);
 				}
-				updateInfo(json.Message=="投票成功");
+				updateInfo(json.Message == "投票成功");
 			});
 		})
 	}
-	
-	function updateInfo(isok){
+
+	function updateInfo(isok) {
 		runCount++;
-		if (isok){
+		if (isok) {
 			okCount++;
-		}else{
+		} else {
 			errCount++;
 		}
 		$("#rel").val(
-			"已经投票 : "+runCount+" 票\n"
-			+"成功    : "+okCount+" 票\n"
-			+"失败    : "+errCount+" 票\n"
-			+"还要投  : "+(allCount-runCount)+" 票\n"
-		);
-		
-		if (allCount==runCount){
-			$("#rel").val(
-			$("#rel").val()
-			+"投票完成!!!!!"
-			);
+				"已经投票 : " + runCount + " 票\n" + "成功    : " + okCount + " 票\n"
+						+ "失败    : " + errCount + " 票\n" + "还要投  : "
+						+ (allCount - runCount) + " 票\n");
+
+		if (allCount == runCount) {
+			$("#rel").val($("#rel").val() + "投票完成!!!!!");
 			$("#go").disabled = false;
-		}else{
+		} else {
 			//toupiao();
 		}
 	}
 </script>
-
 </html>
